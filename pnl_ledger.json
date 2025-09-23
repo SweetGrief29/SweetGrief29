@@ -1,596 +1,31 @@
-<<<<<<< HEAD
 {
   "positions": {
-    "evm:eth:0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": {
-      "symbol": "WETH",
-      "amount": 0.22310422760200882,
-      "investedUsd": 1000.0
-    },
-    "evm:eth:0xdac17f958d2ee523a2206206994597c13d831ec7": {
-      "symbol": "USDT",
-      "amount": 309.9066011556071,
-      "investedUsd": 310.0
-    },
-    "evm:eth:0xcf0c122c6b73ff809c693db761e7baebe62b6a2e": {
-      "symbol": "FLOKI",
-      "amount": 113986.09369656902,
-      "investedUsd": 10.0
-    },
-    "evm:eth:0x7beb8f36650e9327d8c52735e3b3c9d1521576e3": {
-      "symbol": "KEK",
-      "amount": 1322751322.7513227,
-      "investedUsd": 10.0
-    },
-    "svm:svm:5uuh9rtdispq6hks6bp4ndu9pnjpxrxuiw6shbtbhgh2": {
-      "symbol": "TROLL",
-      "amount": 472.14353163361665,
-      "investedUsd": 100.0
-    },
-    "svm:svm:fdef2u9geiws7sdgpcuo2r1wgswkjr2mmvtecih6pump": {
-      "symbol": "MITCH",
-      "amount": 11518.236940148317,
-      "investedUsd": 210.0
-    },
-    "evm:polygon:0xeb51d9a39ad5eef215dc0bf39a8821ff804a0f01": {
-      "symbol": "LGNS",
-      "amount": 56.87120476812969,
-      "investedUsd": 550.0
-    },
-    "svm:svm:cb9dduft3zuqxqqsfa1c5ky935tereybw9xjxxhkpump": {
-      "symbol": "USDUC",
-      "amount": 27442.3710208562,
-      "investedUsd": 1000.0
-    },
-    "svm:svm:h8xq6pobjb9dtpmdtkwzwprnxu4bdehybxiouf8ppump": {
-      "symbol": "TOKABU",
-      "amount": 8278.145695364237,
-      "investedUsd": 300.0
-    },
-    "svm:svm:creiuhfwdwcn5mjbmjta9bbpyqrqf2tcbuzwspwfpump": {
-      "symbol": "PYTHIA",
-      "amount": 4330.8791684712,
-      "investedUsd": 300.0
-    },
-    "svm:svm:3arurph3nzarjbbpvgy42dcqsq9a5bfguxkozz4npump": {
-      "symbol": "STREAMER",
-      "amount": 210559.55690418108,
-      "investedUsd": 2000.0
-    },
-    "evm:eth:0xbe0ed4138121ecfc5c0e56b40517da27e6c5226b": {
-      "symbol": "AETHIR",
-      "amount": 16686.13382279326,
-      "investedUsd": 1000.0
-    },
-    "svm:svm:cardsccumfkoprzxt5vt3ksubxefecnz3h2pd3dkxyjp": {
-      "symbol": "CARDS",
-      "amount": 2095.8203686518546,
-      "investedUsd": 550.0
-    },
-    "svm:eth:epjfwdd5aufqssqem2qn1xzybapc8g4weggkzwytdt1v": {
+    "evm:optimism:0x0b2c639c533813f4aa9d7837caf62653d097ff85": {
       "symbol": "USDC",
-      "amount": 2990.896205280484,
-      "investedUsd": 2989.9999739318223
-    },
-    "svm:polygon:epjfwdd5aufqssqem2qn1xzybapc8g4weggkzwytdt1v": {
-      "symbol": "USDC",
-      "amount": 4921.336489005602,
-      "investedUsd": 4920.0
-    },
-    "svm:eth:y1azt42vcecmstjw4zetk3vonarc1vxj5idjpiupump": {
-      "symbol": "FARTBOY",
-      "amount": 37074.34571842084,
-      "investedUsd": 2000.0
-    },
-    "svm:eth:fyrbf5xkg5ewkz9phvspjellucwbictpm3vvzcsibonk": {
-      "symbol": "FARTLESS",
-      "amount": 711839.3206052099,
-      "investedUsd": 950.0967950096795
-    },
-    "svm:eth:ajgsvymjlhvt3fteiytqqf8xbj1svs6t6amsufkhpump": {
-      "symbol": "GROYPER",
       "amount": 0.0,
       "investedUsd": 0.0
     },
-    "evm:base:0x0ccfa8e00990d51980ecc48f9c7fc6847f0696e6": {
-      "symbol": "LABUBU",
-      "amount": 8703339.535024656,
-      "investedUsd": 10197.0
-    },
-    "svm:svm:ajgsvymjlhvt3fteiytqqf8xbj1svs6t6amsufkhpump": {
-      "symbol": "GROYPER",
-      "amount": 28442.112724474657,
-      "investedUsd": 55.0
-    },
-    "evm:base:0x052bc78b043be8d39a45bb33b1fd693d553eaf28": {
-      "symbol": "IMAGINE",
-      "amount": 21540540.273553748,
-      "investedUsd": 8519.0
-    },
-    "svm:svm:b8zw7b8t7ntciiryw18jrfu9mbqmzvk9pp7nyyt5iblv": {
-      "symbol": "HUCH",
-      "amount": 780640.12490242,
-      "investedUsd": 3000.0
-    },
-    "svm:svm:gmzuntwyjlpnucizrsr7zxggimddztniemsnhhunpump": {
-      "symbol": "DREAMS",
-      "amount": 518134.71502590674,
-      "investedUsd": 3000.0
-    },
     "svm:svm:epjfwdd5aufqssqem2qn1xzybapc8g4weggkzwytdt1v": {
       "symbol": "USDC",
-      "amount": 310489.3776172752,
-      "investedUsd": 310332.4
+      "amount": 4223.629175143924,
+      "investedUsd": 4219.9
     },
-    "evm:base:0x00a510c6f786f13231d943fd22d4c45e8c51accf": {
-      "symbol": "IP",
-      "amount": 8164410810.220741,
-      "investedUsd": 58865.22551099588
-    },
-    "evm:base:0x4200000000000000000000000000000000000006": {
-      "symbol": "WETH",
-      "amount": 1.1164149542492166,
-      "investedUsd": 5010.0
-    },
-    "evm:base:0x0738a4d015e75d08b7f2395877a9404d2841a5d1": {
-      "symbol": "TRUMP",
-      "amount": 84613933040.39471,
-      "investedUsd": 13000.0
-    },
-    "evm:base:0x0a0427414b68bddd84a57e39c1a21a5add259043": {
-      "symbol": "GOAT",
-      "amount": 186464886.31192118,
-      "investedUsd": 28000.0
-    }
-  },
-  "realized": [
-    {
-      "time": "2025-09-04T20:04:48.171872+00:00",
-      "token": "WETH",
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-      "chain": "evm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.2911134523764001,
-      "proceedsUsd": 2000.0,
-      "costUsd": 1252.4469670645599,
-      "pnlUsd": 747.5530329354401
-    },
-    {
-      "time": "2025-09-16T03:42:52.020567+00:00",
-      "token": "USDC",
-      "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 50.015004501350404,
-      "proceedsUsd": 50.0,
-      "costUsd": 50.00002606817781,
-      "pnlUsd": -2.60681778101457e-05
-    },
-    {
-      "time": "2025-09-16T03:43:20.300735+00:00",
-      "token": "FARTLESS",
-      "address": "FyrBf5xKg5EwKZ9pHvSpJeLLuCWBicTpm3VvZcsibonk",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 74850.29940119761,
-      "proceedsUsd": 100.0,
-      "costUsd": 99.90320499032053,
-      "pnlUsd": 0.09679500967946808
-    },
-    {
-      "time": "2025-09-16T15:48:15.088368+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:48:23.954033+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:48:31.487108+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:48:39.929707+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:49:13.717000+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:50:10.168220+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:50:23.292455+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:50:44.879363+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:51:00.442419+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:51:18.055420+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:51:46.785682+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:52:30.319257+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:53:17.051329+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:53:29.573188+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:53:49.928980+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:54:51.734185+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:55:03.691777+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:55:27.026227+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:55:46.124117+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:56:48.795827+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:57:20.931252+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 200.0,
-      "costUsd": 0.0,
-      "pnlUsd": 200.0
-    },
-    {
-      "time": "2025-09-18T10:59:13.492219+00:00",
-      "token": "IP",
-      "address": "0x00a510c6f786f13231D943fD22d4C45E8C51AcCF",
-      "chain": "evm",
-      "specificChain": "base",
-      "side": "sell",
-      "amount": 506072874.4939271,
-      "proceedsUsd": 10000.0,
-      "costUsd": 3648.774489004124,
-      "pnlUsd": 6351.225510995876
-    }
-  ],
-  "stats": {
-    "realizedUsd": 15698.875312872817
-  }
-=======
-{
-  "positions": {
-    "evm:eth:0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": {
-      "symbol": "WETH",
-      "amount": 0.22774613895542772,
-      "investedUsd": 1020.0
-    },
-    "evm:eth:0xdac17f958d2ee523a2206206994597c13d831ec7": {
-      "symbol": "USDT",
-      "amount": 309.9066011556071,
-      "investedUsd": 310.0
-    },
-    "evm:eth:0xcf0c122c6b73ff809c693db761e7baebe62b6a2e": {
-      "symbol": "FLOKI",
-      "amount": 113986.09369656902,
-      "investedUsd": 10.0
-    },
-    "evm:eth:0x7beb8f36650e9327d8c52735e3b3c9d1521576e3": {
-      "symbol": "KEK",
-      "amount": 1322751322.7513227,
-      "investedUsd": 10.0
-    },
-    "svm:svm:5uuh9rtdispq6hks6bp4ndu9pnjpxrxuiw6shbtbhgh2": {
-      "symbol": "TROLL",
-      "amount": 472.14353163361665,
-      "investedUsd": 100.0
-    },
-    "svm:svm:fdef2u9geiws7sdgpcuo2r1wgswkjr2mmvtecih6pump": {
-      "symbol": "MITCH",
-      "amount": 11518.236940148317,
-      "investedUsd": 210.0
-    },
-    "evm:polygon:0xeb51d9a39ad5eef215dc0bf39a8821ff804a0f01": {
-      "symbol": "LGNS",
-      "amount": 56.87120476812969,
-      "investedUsd": 550.0
-    },
-    "svm:svm:cb9dduft3zuqxqqsfa1c5ky935tereybw9xjxxhkpump": {
-      "symbol": "USDUC",
-      "amount": 27442.3710208562,
-      "investedUsd": 1000.0
-    },
-    "svm:svm:h8xq6pobjb9dtpmdtkwzwprnxu4bdehybxiouf8ppump": {
-      "symbol": "TOKABU",
-      "amount": 8278.145695364237,
-      "investedUsd": 300.0
-    },
-    "svm:svm:creiuhfwdwcn5mjbmjta9bbpyqrqf2tcbuzwspwfpump": {
-      "symbol": "PYTHIA",
-      "amount": 4330.8791684712,
-      "investedUsd": 300.0
-    },
-    "svm:svm:3arurph3nzarjbbpvgy42dcqsq9a5bfguxkozz4npump": {
-      "symbol": "STREAMER",
-      "amount": 210559.55690418108,
-      "investedUsd": 2000.0
-    },
-    "evm:eth:0xbe0ed4138121ecfc5c0e56b40517da27e6c5226b": {
-      "symbol": "AETHIR",
-      "amount": 16686.13382279326,
-      "investedUsd": 1000.0
-    },
-    "svm:svm:cardsccumfkoprzxt5vt3ksubxefecnz3h2pd3dkxyjp": {
-      "symbol": "CARDS",
-      "amount": 2095.8203686518546,
-      "investedUsd": 550.0
-    },
-    "svm:eth:epjfwdd5aufqssqem2qn1xzybapc8g4weggkzwytdt1v": {
+    "evm:optimism:0x7f5c764cbc14f9669b88837ca1490cca17c31607": {
       "symbol": "USDC",
-      "amount": 2990.896205280484,
-      "investedUsd": 2989.9999739318223
-    },
-    "svm:polygon:epjfwdd5aufqssqem2qn1xzybapc8g4weggkzwytdt1v": {
-      "symbol": "USDC",
-      "amount": 4921.336489005602,
-      "investedUsd": 4920.0
-    },
-    "svm:eth:y1azt42vcecmstjw4zetk3vonarc1vxj5idjpiupump": {
-      "symbol": "FARTBOY",
-      "amount": 37074.34571842084,
-      "investedUsd": 2000.0
-    },
-    "svm:eth:fyrbf5xkg5ewkz9phvspjellucwbictpm3vvzcsibonk": {
-      "symbol": "FARTLESS",
-      "amount": 711839.3206052099,
-      "investedUsd": 950.0967950096795
-    },
-    "svm:eth:ajgsvymjlhvt3fteiytqqf8xbj1svs6t6amsufkhpump": {
-      "symbol": "GROYPER",
       "amount": 0.0,
       "investedUsd": 0.0
-    },
-    "evm:base:0x0ccfa8e00990d51980ecc48f9c7fc6847f0696e6": {
-      "symbol": "LABUBU",
-      "amount": 8705769.078270527,
-      "investedUsd": 10207.0
-    },
-    "svm:svm:ajgsvymjlhvt3fteiytqqf8xbj1svs6t6amsufkhpump": {
-      "symbol": "GROYPER",
-      "amount": 28442.112724474657,
-      "investedUsd": 55.0
-    },
-    "evm:base:0x052bc78b043be8d39a45bb33b1fd693d553eaf28": {
-      "symbol": "IMAGINE",
-      "amount": 21540540.273553748,
-      "investedUsd": 8519.0
-    },
-    "svm:svm:b8zw7b8t7ntciiryw18jrfu9mbqmzvk9pp7nyyt5iblv": {
-      "symbol": "HUCH",
-      "amount": 780640.12490242,
-      "investedUsd": 3000.0
-    },
-    "svm:svm:gmzuntwyjlpnucizrsr7zxggimddztniemsnhhunpump": {
-      "symbol": "DREAMS",
-      "amount": 518134.71502590674,
-      "investedUsd": 3000.0
-    },
-    "svm:svm:epjfwdd5aufqssqem2qn1xzybapc8g4weggkzwytdt1v": {
-      "symbol": "USDC",
-      "amount": 310619.4817005421,
-      "investedUsd": 310462.39410975913
-    },
-    "evm:base:0x00a510c6f786f13231d943fd22d4c45e8c51accf": {
-      "symbol": "IP",
-      "amount": 8164410810.220741,
-      "investedUsd": 58865.22551099588
-    },
-    "evm:base:0x4200000000000000000000000000000000000006": {
-      "symbol": "WETH",
-      "amount": 1.1164149542492166,
-      "investedUsd": 5010.0
-    },
-    "evm:base:0x0738a4d015e75d08b7f2395877a9404d2841a5d1": {
-      "symbol": "TRUMP",
-      "amount": 84613933040.39471,
-      "investedUsd": 13000.0
-    },
-    "evm:base:0x0a0427414b68bddd84a57e39c1a21a5add259043": {
-      "symbol": "GOAT",
-      "amount": 186464886.31192118,
-      "investedUsd": 28000.0
     },
     "evm:arbitrum:0xaf88d065e77c8cc2239327c5edb3a432268e5831": {
+      "symbol": "USDC",
+      "amount": 0.0,
+      "investedUsd": 0.0
+    },
+    "evm:base:0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca": {
+      "symbol": "USDbC",
+      "amount": 0.0,
+      "investedUsd": 0.0
+    },
+    "evm:eth:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": {
       "symbol": "USDC",
       "amount": 0.0,
       "investedUsd": 0.0
@@ -600,361 +35,129 @@
       "amount": 0.0,
       "investedUsd": 0.0
     },
-    "evm:eth:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": {
-      "symbol": "USDC",
+    "svm:svm:5uuh9rtdispq6hks6bp4ndu9pnjpxrxuiw6shbtbhgh2": {
+      "symbol": "TROLL",
       "amount": 0.0,
       "investedUsd": 0.0
     },
-    "evm:base:0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca": {
-      "symbol": "USDbC",
-      "amount": 7.000700070007,
-      "investedUsd": 7.0
+    "evm:base:0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf": {
+      "symbol": "CBBTC",
+      "amount": 1.2148332005255773e-05,
+      "investedUsd": 1.3710288000000048
     },
-    "evm:optimism:0x0b2c639c533813f4aa9d7837caf62653d097ff85": {
-      "symbol": "USDC",
-      "amount": 19.993801921404366,
-      "investedUsd": 20.0
+    "svm:svm:5psnnwpmmtsgzgg6zqmodjji28br5xpaotxhhiqhpump": {
+      "symbol": "CUPSEY",
+      "amount": 4723.67298777285,
+      "investedUsd": 15.179091731222702
+    },
+    "svm:svm:zgh48jtnhvbb5evgozlxwgpd2qu4mhkwdjlgdaupump": {
+      "symbol": "RETIRE",
+      "amount": 5.161993769469518,
+      "investedUsd": 0.06627999999999085
+    },
+    "svm:svm:strikemjek2tfvypg7smo9ngprnj56fhns1k7pv2fpw": {
+      "symbol": "STRIKE",
+      "amount": 3005.0811077106337,
+      "investedUsd": 3.0922284598342316
+    },
+    "svm:svm:7olwgmugbbm9uwdmffsdxle98ychfah1udy5xpkylff8": {
+      "symbol": "WOJAK",
+      "amount": 121182.74357731458,
+      "investedUsd": 500.0
+    },
+    "svm:svm:8ki8dpuwnxu9vss3kqbarscwmcfgwkzza8pupto9zbd5": {
+      "symbol": "LOCKIN",
+      "amount": 63363.32530731212,
+      "investedUsd": 500.0
     }
   },
   "realized": [
     {
-      "time": "2025-09-04T20:04:48.171872+00:00",
-      "token": "WETH",
-      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-      "chain": "evm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.2911134523764001,
-      "proceedsUsd": 2000.0,
-      "costUsd": 1252.4469670645599,
-      "pnlUsd": 747.5530329354401
-    },
-    {
-      "time": "2025-09-16T03:42:52.020567+00:00",
+      "time": "2025-09-22T07:15:14.849464+00:00",
       "token": "USDC",
-      "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 50.015004501350404,
-      "proceedsUsd": 50.0,
-      "costUsd": 50.00002606817781,
-      "pnlUsd": -2.60681778101457e-05
-    },
-    {
-      "time": "2025-09-16T03:43:20.300735+00:00",
-      "token": "FARTLESS",
-      "address": "FyrBf5xKg5EwKZ9pHvSpJeLLuCWBicTpm3VvZcsibonk",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 74850.29940119761,
-      "proceedsUsd": 100.0,
-      "costUsd": 99.90320499032053,
-      "pnlUsd": 0.09679500967946808
-    },
-    {
-      "time": "2025-09-16T15:48:15.088368+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:48:23.954033+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:48:31.487108+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:48:39.929707+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 100.0,
-      "costUsd": 0.0,
-      "pnlUsd": 100.0
-    },
-    {
-      "time": "2025-09-16T15:49:13.717000+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:50:10.168220+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:50:23.292455+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:50:44.879363+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:51:00.442419+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:51:18.055420+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:51:46.785682+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:52:30.319257+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:53:17.051329+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:53:29.573188+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:53:49.928980+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:54:51.734185+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:55:03.691777+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:55:27.026227+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:55:46.124117+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:56:48.795827+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 500.0,
-      "costUsd": 0.0,
-      "pnlUsd": 500.0
-    },
-    {
-      "time": "2025-09-16T15:57:20.931252+00:00",
-      "token": "GROYPER",
-      "address": "AjgSvYmJLhvt3FteiyTqQf8XBj1SVs6T6AmSUfkHpump",
-      "chain": "svm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 200.0,
-      "costUsd": 0.0,
-      "pnlUsd": 200.0
-    },
-    {
-      "time": "2025-09-18T10:59:13.492219+00:00",
-      "token": "IP",
-      "address": "0x00a510c6f786f13231D943fD22d4C45E8C51AcCF",
+      "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85",
       "chain": "evm",
-      "specificChain": "base",
+      "specificChain": "optimism",
       "side": "sell",
-      "amount": 506072874.4939271,
-      "proceedsUsd": 10000.0,
-      "costUsd": 3648.774489004124,
-      "pnlUsd": 6351.225510995876
+      "amount": 0.0,
+      "proceedsUsd": 19.9,
+      "costUsd": 0.0,
+      "pnlUsd": 19.9
     },
     {
-      "time": "2025-09-22T04:39:36.302204+00:00",
+      "time": "2025-09-22T07:16:37.596668+00:00",
+      "token": "USDC",
+      "address": "0x7f5c764cbc14f9669b88837ca1490cca17c31607",
+      "chain": "evm",
+      "specificChain": "optimism",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 100.0,
+      "costUsd": 0.0,
+      "pnlUsd": 100.0
+    },
+    {
+      "time": "2025-09-22T07:16:57.783349+00:00",
       "token": "USDC",
       "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
       "chain": "evm",
       "specificChain": "arbitrum",
       "side": "sell",
       "amount": 0.0,
-      "proceedsUsd": 10.0,
+      "proceedsUsd": 100.0,
       "costUsd": 0.0,
-      "pnlUsd": 10.0
+      "pnlUsd": 100.0
     },
     {
-      "time": "2025-09-22T04:40:09.610086+00:00",
+      "time": "2025-09-22T07:17:09.862846+00:00",
+      "token": "USDbC",
+      "address": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA",
+      "chain": "evm",
+      "specificChain": "base",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 100.0,
+      "costUsd": 0.0,
+      "pnlUsd": 100.0
+    },
+    {
+      "time": "2025-09-22T07:17:19.222346+00:00",
+      "token": "USDC",
+      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "chain": "evm",
+      "specificChain": "eth",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 100.0,
+      "costUsd": 0.0,
+      "pnlUsd": 100.0
+    },
+    {
+      "time": "2025-09-22T07:17:31.133885+00:00",
       "token": "USDC",
       "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
       "chain": "evm",
       "specificChain": "polygon",
       "side": "sell",
       "amount": 0.0,
-      "proceedsUsd": 10.0,
+      "proceedsUsd": 100.0,
       "costUsd": 0.0,
-      "pnlUsd": 10.0
+      "pnlUsd": 100.0
     },
     {
-      "time": "2025-09-22T04:40:23.164174+00:00",
+      "time": "2025-09-22T07:33:15.734382+00:00",
       "token": "USDC",
-      "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+      "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
       "chain": "evm",
-      "specificChain": "arbitrum",
+      "specificChain": "polygon",
       "side": "sell",
       "amount": 0.0,
-      "proceedsUsd": 10.0,
+      "proceedsUsd": 100.0,
       "costUsd": 0.0,
-      "pnlUsd": 10.0
+      "pnlUsd": 100.0
     },
     {
-      "time": "2025-09-22T04:40:40.474677+00:00",
+      "time": "2025-09-22T08:51:20.903071+00:00",
       "token": "USDC",
       "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
       "chain": "evm",
@@ -966,55 +169,7 @@
       "pnlUsd": 10.0
     },
     {
-      "time": "2025-09-22T04:49:20.553379+00:00",
-      "token": "USDC",
-      "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
-      "chain": "evm",
-      "specificChain": "arbitrum",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T04:58:24.034599+00:00",
-      "token": "USDbC",
-      "address": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA",
-      "chain": "evm",
-      "specificChain": "base",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:01:06.011888+00:00",
-      "token": "USDbC",
-      "address": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA",
-      "chain": "evm",
-      "specificChain": "base",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:07:39.871282+00:00",
-      "token": "USDC",
-      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      "chain": "evm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:07:58.108242+00:00",
+      "time": "2025-09-22T08:51:28.024263+00:00",
       "token": "USDC",
       "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
       "chain": "evm",
@@ -1026,7 +181,7 @@
       "pnlUsd": 10.0
     },
     {
-      "time": "2025-09-22T05:08:18.185394+00:00",
+      "time": "2025-09-22T08:51:37.109088+00:00",
       "token": "USDbC",
       "address": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA",
       "chain": "evm",
@@ -1038,7 +193,19 @@
       "pnlUsd": 10.0
     },
     {
-      "time": "2025-09-22T05:08:47.333669+00:00",
+      "time": "2025-09-22T08:51:45.488276+00:00",
+      "token": "USDC",
+      "address": "0x7f5c764cbc14f9669b88837ca1490cca17c31607",
+      "chain": "evm",
+      "specificChain": "optimism",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 10.0,
+      "costUsd": 0.0,
+      "pnlUsd": 10.0
+    },
+    {
+      "time": "2025-09-22T08:51:53.932461+00:00",
       "token": "USDC",
       "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
       "chain": "evm",
@@ -1050,104 +217,199 @@
       "pnlUsd": 10.0
     },
     {
-      "time": "2025-09-22T05:13:52.772896+00:00",
-      "token": "USDC",
-      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      "chain": "evm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:14:02.646077+00:00",
-      "token": "USDC",
-      "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-      "chain": "evm",
-      "specificChain": "polygon",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:14:14.801273+00:00",
-      "token": "USDC",
-      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      "chain": "evm",
-      "specificChain": "eth",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:14:23.795425+00:00",
-      "token": "USDC",
-      "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-      "chain": "evm",
-      "specificChain": "polygon",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:15:04.925068+00:00",
-      "token": "USDbC",
-      "address": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA",
-      "chain": "evm",
-      "specificChain": "base",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T05:15:14.966514+00:00",
-      "token": "USDC",
-      "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
-      "chain": "evm",
-      "specificChain": "arbitrum",
-      "side": "sell",
-      "amount": 0.0,
-      "proceedsUsd": 10.0,
-      "costUsd": 0.0,
-      "pnlUsd": 10.0
-    },
-    {
-      "time": "2025-09-22T06:40:17.515056+00:00",
-      "token": "USDC",
-      "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "time": "2025-09-22T09:52:41.322343+00:00",
+      "token": "TROLL",
+      "address": "5UUH9RTDiSpq6HKS6bp4NdU9PNJpXRXuiw6ShBTBhgH2",
       "chain": "svm",
       "specificChain": "svm",
       "side": "sell",
-      "amount": 10.0080064051241,
-      "proceedsUsd": 10.0,
-      "costUsd": 10.002945120474099,
-      "pnlUsd": -0.0029451204740986725
+      "amount": 0.0,
+      "proceedsUsd": 43.851,
+      "costUsd": 0.0,
+      "pnlUsd": 43.851
     },
     {
-      "time": "2025-09-22T06:40:55.964333+00:00",
+      "time": "2025-09-22T15:20:23.199481+00:00",
       "token": "USDC",
-      "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "chain": "evm",
+      "specificChain": "eth",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 10.0,
+      "costUsd": 0.0,
+      "pnlUsd": 10.0
+    },
+    {
+      "time": "2025-09-22T15:20:56.978588+00:00",
+      "token": "USDC",
+      "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+      "chain": "evm",
+      "specificChain": "polygon",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 10.0,
+      "costUsd": 0.0,
+      "pnlUsd": 10.0
+    },
+    {
+      "time": "2025-09-22T15:21:06.987570+00:00",
+      "token": "USDbC",
+      "address": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA",
+      "chain": "evm",
+      "specificChain": "base",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 10.0,
+      "costUsd": 0.0,
+      "pnlUsd": 10.0
+    },
+    {
+      "time": "2025-09-22T15:21:19.532535+00:00",
+      "token": "USDC",
+      "address": "0x7f5c764cbc14f9669b88837ca1490cca17c31607",
+      "chain": "evm",
+      "specificChain": "optimism",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 10.0,
+      "costUsd": 0.0,
+      "pnlUsd": 10.0
+    },
+    {
+      "time": "2025-09-22T15:21:28.925900+00:00",
+      "token": "USDC",
+      "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+      "chain": "evm",
+      "specificChain": "arbitrum",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 10.0,
+      "costUsd": 0.0,
+      "pnlUsd": 10.0
+    },
+    {
+      "time": "2025-09-23T02:12:19.039457+00:00",
+      "token": "RETIRE",
+      "address": "zGh48JtNHVBb5evgoZLXwgPD2Qu4MhkWdJLGDAupump",
       "chain": "svm",
       "specificChain": "svm",
       "side": "sell",
-      "amount": 10.0080064051241,
-      "proceedsUsd": 10.0,
-      "costUsd": 10.002945120474099,
-      "pnlUsd": -0.0029451204740986725
+      "amount": 7770.0,
+      "proceedsUsd": 96.9696,
+      "costUsd": 99.7668,
+      "pnlUsd": -2.7972000000000037
+    },
+    {
+      "time": "2025-09-23T02:12:38.686171+00:00",
+      "token": "RETIRE",
+      "address": "zGh48JtNHVBb5evgoZLXwgPD2Qu4MhkWdJLGDAupump",
+      "chain": "svm",
+      "specificChain": "svm",
+      "side": "sell",
+      "amount": 13.0,
+      "proceedsUsd": 0.16302,
+      "costUsd": 0.16692000000000567,
+      "pnlUsd": -0.0039000000000056767
+    },
+    {
+      "time": "2025-09-23T02:14:09.462317+00:00",
+      "token": "CBBTC",
+      "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+      "chain": "evm",
+      "specificChain": "base",
+      "side": "sell",
+      "amount": 0.00176,
+      "proceedsUsd": 197.8736848,
+      "costUsd": 198.6289712,
+      "pnlUsd": -0.7552863999999886
+    },
+    {
+      "time": "2025-09-23T04:35:34.545951+00:00",
+      "token": "USDC",
+      "address": "0x7f5c764cbc14f9669b88837ca1490cca17c31607",
+      "chain": "evm",
+      "specificChain": "optimism",
+      "side": "sell",
+      "amount": 0.0,
+      "proceedsUsd": 3500.0,
+      "costUsd": 0.0,
+      "pnlUsd": 3500.0
+    },
+    {
+      "time": "2025-09-23T06:58:29.902384+00:00",
+      "token": "CUPSEY",
+      "address": "5PsnNwPmMtsGZgG6ZqMoDJJi28BR5xpAotXHHiQhpump",
+      "chain": "svm",
+      "specificChain": "svm",
+      "side": "sell",
+      "amount": 959975.0,
+      "proceedsUsd": 3595.106375,
+      "costUsd": 3084.791987590751,
+      "pnlUsd": 510.31438740924887
+    },
+    {
+      "time": "2025-09-23T06:59:03.092110+00:00",
+      "token": "CUPSEY",
+      "address": "5PsnNwPmMtsGZgG6ZqMoDJJi28BR5xpAotXHHiQhpump",
+      "chain": "svm",
+      "specificChain": "svm",
+      "side": "sell",
+      "amount": 9.0,
+      "proceedsUsd": 0.033705,
+      "costUsd": 0.02892067802632015,
+      "pnlUsd": 0.00478432197367985
+    },
+    {
+      "time": "2025-09-23T07:06:03.921627+00:00",
+      "token": "STRIKE",
+      "address": "STrikemJEk2tFVYpg7SMo9nGPrnJ56fHnS1K7PV2fPw",
+      "chain": "svm",
+      "specificChain": "svm",
+      "side": "sell",
+      "amount": 484406.98128011,
+      "proceedsUsd": 507.1741094002752,
+      "costUsd": 498.4547837372332,
+      "pnlUsd": 8.719325663042014
+    },
+    {
+      "time": "2025-09-23T07:06:26.605495+00:00",
+      "token": "STRIKE",
+      "address": "STrikemJEk2tFVYpg7SMo9nGPrnJ56fHnS1K7PV2fPw",
+      "chain": "svm",
+      "specificChain": "svm",
+      "side": "sell",
+      "amount": 242203.49064006,
+      "proceedsUsd": 253.5870547001428,
+      "costUsd": 249.2273918686217,
+      "pnlUsd": 4.359662831521092
+    },
+    {
+      "time": "2025-09-23T07:06:38.568310+00:00",
+      "token": "STRIKE",
+      "address": "STrikemJEk2tFVYpg7SMo9nGPrnJ56fHnS1K7PV2fPw",
+      "chain": "svm",
+      "specificChain": "svm",
+      "side": "sell",
+      "amount": 121101.74532003,
+      "proceedsUsd": 127.27793433135153,
+      "costUsd": 124.61369593431085,
+      "pnlUsd": 2.664238397040677
+    },
+    {
+      "time": "2025-09-23T07:07:01.229331+00:00",
+      "token": "STRIKE",
+      "address": "STrikemJEk2tFVYpg7SMo9nGPrnJ56fHnS1K7PV2fPw",
+      "chain": "svm",
+      "specificChain": "svm",
+      "side": "sell",
+      "amount": 121100.0,
+      "proceedsUsd": 127.27610000000001,
+      "costUsd": 124.61190000000002,
+      "pnlUsd": 2.664199999999994
     }
   ],
   "stats": {
-    "realizedUsd": 15868.86942263187
+    "realizedUsd": 4788.9212122228255
   }
->>>>>>> a51f7a7 (push)
 }
