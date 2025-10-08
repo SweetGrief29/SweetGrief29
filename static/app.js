@@ -292,11 +292,14 @@ const fmtAmt = (n) =>
 // Balances table
 // =======================
 async function loadBalances() {
-  const tbody = document.getElementById("balancesBody");
-  const totalCell = document.getElementById("totalCell");
+  const tokenBody = document.getElementById("balancesBody");
+  const cashBody = document.getElementById("balancesCashBody");
+  const tokenTotalCell = document.getElementById("balancesTokenTotal");
+  const cashTotalCell = document.getElementById("balancesCashTotal");
   const alertBox = document.getElementById("balancesAlert");
-  if (!tbody) return;
-  tbody.innerHTML = "";
+  if (!tokenBody) return;
+  tokenBody.innerHTML = "";
+  if (cashBody) cashBody.innerHTML = "";
   alertBox && alertBox.classList.add("d-none");
   try {
     const res = await fetch(balancesEndpointUrl());
@@ -304,25 +307,55 @@ async function loadBalances() {
     if (data.error) throw new Error(data.error);
 
     BALANCE_MAP.clear();
-    let total = 0;
+    const tokenRows = [];
+    const cashRows = [];
+    const toUpper = (sym) => String(sym || "").toUpperCase();
+    const isExcludedBalance = (entry) => {
+      const upper = toUpper(entry.symbol);
+      return upper.includes("USDC.E");
+    };
+    const isCashBalance = (entry) => {
+      if (isExcludedBalance(entry)) return false;
+      const upper = toUpper(entry.symbol);
+      return upper.includes("USDC") || upper.includes("USDBC");
+    };
+    const hideSmallAmount = document.getElementById("hideSmallAmount")?.checked;
+    const amountThreshold = 1;
+    let tokenValueTotal = 0;
+    let cashValueTotal = 0;
+
     (data.balances || []).forEach((b) => {
+      if (isExcludedBalance(b)) {
+        return;
+      }
       const amount = Number(b.amount || 0);
       const valueUsd = Number(b.value || 0);
-      total += valueUsd;
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
+      const price = b.price != null ? Number(b.price) : null;
+      const shouldHideAmount = hideSmallAmount && Math.abs(amount) < amountThreshold;
+      const row = {
+        html: `
         <td>${b.symbol || ""}</td>
         <td>${b.chain || ""}</td>
         <td>${b.specificChain || ""}</td>
         <td class="text-end">${amount.toLocaleString()}</td>
-        <td class="text-end">${
-          b.price != null ? "$" + Number(b.price).toFixed(4) : ""
-        }</td>
-        <td class="text-end">${
-          b.value != null ? "$" + Number(b.value).toFixed(2) : ""
-        }</td>
-      `;
-      tbody.appendChild(tr);
+        <td class="text-end">${price != null ? "$" + price.toFixed(4) : ""}</td>
+        <td class="text-end">${b.value != null ? "$" + valueUsd.toFixed(2) : ""}</td>
+      `,
+        value: valueUsd,
+        amount,
+      };
+      const isCash = isCashBalance(b);
+      if (isCash) {
+        cashValueTotal += valueUsd;
+        if (!shouldHideAmount) {
+          cashRows.push(row);
+        }
+      } else {
+        tokenValueTotal += valueUsd;
+        if (!shouldHideAmount) {
+          tokenRows.push(row);
+        }
+      }
 
       if (b.tokenAddress) {
         const key = balanceKey(b.tokenAddress, b.chain, b.specificChain);
@@ -333,15 +366,29 @@ async function loadBalances() {
         });
       }
     });
-    if (totalCell) totalCell.textContent = "$" + total.toFixed(2);
-  } catch (e) {
-    if (alertBox) {
-      alertBox.textContent = "Gagal memuat balances: " + e.message;
-      alertBox.classList.remove("d-none");
-    }
+
+    const appendRows = (body, rows) => {
+      if (!body) return;
+      rows.forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = row.html;
+        body.appendChild(tr);
+      });
+    };
+
+    appendRows(tokenBody, tokenRows);
+    appendRows(cashBody, cashRows);
+
+    if (tokenTotalCell) tokenTotalCell.textContent = "$" + tokenValueTotal.toFixed(2);
+    if (cashTotalCell) cashTotalCell.textContent = "$" + cashValueTotal.toFixed(2);
+  } catch (_) {
+    // silent
   }
   refreshSellAvailability();
 }
+
+
+
 
 // =======================
 // Tokens registry
@@ -830,8 +877,18 @@ async function batchTrade() {
     else if (toChain === "svm") toSpecificChain = "svm";
   }
   const side = (document.getElementById("batchSide")?.value || "buy").toLowerCase();
-  const totalUsd = Number(document.getElementById("batchTotalUsd")?.value || 0);
-  const chunkUsd = Number(document.getElementById("batchChunkUsd")?.value || 1);
+  const totalUsdEl = document.getElementById("batchTotalUsd");
+  const totalUsdRaw = (totalUsdEl?.value ?? "").trim();
+  const totalUsd = totalUsdRaw ? Number(totalUsdRaw) : 0;
+  const chunkUsdEl = document.getElementById("batchChunkUsd");
+  const chunkUsdRaw = (chunkUsdEl?.value ?? "").trim();
+  const chunkUsd = chunkUsdRaw ? Number(chunkUsdRaw) : 0;
+  const totalTokenEl = document.getElementById("batchTotalToken");
+  const totalTokenRaw = (totalTokenEl?.value ?? "").trim();
+  const totalToken = totalTokenRaw ? Number(totalTokenRaw) : 0;
+  const chunkTokenEl = document.getElementById("batchChunkToken");
+  const chunkTokenRaw = (chunkTokenEl?.value ?? "").trim();
+  const chunkToken = chunkTokenRaw ? Number(chunkTokenRaw) : 0;
   const reason = document.getElementById("batchReason")?.value || `batch ${side}`;
   const out = document.getElementById("tradeOut");
   if (out) out.textContent = `Processing batch ${side}...`;
@@ -839,27 +896,57 @@ async function batchTrade() {
     if (out) out.textContent = "fromToken/toToken belum dipilih";
     return;
   }
-  if (!totalUsd || totalUsd <= 0) {
-    if (out) out.textContent = "totalUsd harus > 0";
+  const useTokenMode =
+    side === "sell" && totalTokenRaw !== "" && !Number.isNaN(totalToken) && totalToken > 0;
+  if (useTokenMode) {
+    if (Number.isNaN(totalToken) || totalToken <= 0) {
+      if (out) out.textContent = "totalToken harus > 0";
+      return;
+    }
+    if (chunkTokenRaw && (Number.isNaN(chunkToken) || chunkToken <= 0)) {
+      if (out) out.textContent = "chunkToken harus > 0 jika diisi";
+      return;
+    }
+  } else if (side === "sell") {
+    if (out) out.textContent = "Isi total token untuk batch sell";
     return;
+  } else {
+    if (Number.isNaN(totalUsd) || totalUsd <= 0) {
+      if (out) out.textContent = "totalUsd harus > 0";
+      return;
+    }
+    if (Number.isNaN(chunkUsd) || chunkUsd <= 0) {
+      if (out) out.textContent = "chunkUsd harus > 0";
+      return;
+    }
   }
-  if (!chunkUsd || chunkUsd <= 0) {
-    if (out) out.textContent = "chunkUsd harus > 0";
-    return;
-  }
+
   try {
     const payload = {
       side,
       fromToken,
       toToken,
-      totalUsd,
-      chunkUsd,
       reason,
       chain,
       specificChain,
       toChain,
       toSpecificChain,
     };
+    if (useTokenMode) {
+      payload.totalToken = totalToken;
+      if (chunkTokenRaw && !Number.isNaN(chunkToken) && chunkToken > 0) {
+        payload.chunkToken = chunkToken;
+      }
+      if (!Number.isNaN(totalUsd) && totalUsd > 0) {
+        payload.totalUsd = totalUsd;
+      }
+      if (!Number.isNaN(chunkUsd) && chunkUsd > 0) {
+        payload.chunkUsd = chunkUsd;
+      }
+    } else {
+      payload.totalUsd = totalUsd;
+      payload.chunkUsd = chunkUsd;
+    }
     const res = await fetch("/api/batch-trade", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -874,6 +961,7 @@ async function batchTrade() {
     if (out) out.textContent = "Error: " + e.message;
   }
 }
+
 
 
 
@@ -977,12 +1065,16 @@ async function clearTrades() {
 // =======================
 async function loadPnl() {
   const posBody = document.getElementById("pnlPositions");
+  const cashBody = document.getElementById("pnlCashPositions");
   const rlzBody = document.getElementById("pnlRealized");
   const totalVal = document.getElementById("pnlTotalValue");
   const totalUnrl = document.getElementById("pnlTotalUnreal");
+  const cashTotalVal = document.getElementById("pnlCashTotalValue");
+  const cashTotalUnrl = document.getElementById("pnlCashTotalUnreal");
   const totalRlz = document.getElementById("pnlTotalRealized");
   if (!posBody || !rlzBody) return;
   posBody.innerHTML = "";
+  if (cashBody) cashBody.innerHTML = "";
   rlzBody.innerHTML = "";
   try {
     const res = await fetch("/api/pnl");
@@ -990,34 +1082,92 @@ async function loadPnl() {
     if (data.error) throw new Error(data.error);
 
     const positions = data.positions || {};
-    Object.values(positions).forEach((p) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
+    const tokenRows = [];
+    const cashRows = [];
+    const isUsdcSymbol = (sym) => {
+      if (!sym) return false;
+      const upper = String(sym).toUpperCase();
+      return upper.includes("USDC") || upper.includes("USDBC");
+    };
+    const formatUsd = (val, digits = 2, blankZero = false) => {
+      if (val == null || !Number.isFinite(val)) return blankZero ? "" : "$0.00";
+      if (Math.abs(val) < 1e-9) return blankZero ? "" : "$0.00";
+      return "$" + val.toFixed(digits);
+    };
+    const makeRow = (p) => {
+      const amount = Number(p.amount || 0);
+      const avgCost = p.avgCostPerUnitUsd != null ? Number(p.avgCostPerUnitUsd) : null;
+      const price = p.marketPriceUsd != null ? Number(p.marketPriceUsd) : null;
+      const value = Number(p.marketValueUsd || 0);
+      const unreal = Number(p.unrealizedUsd || 0);
+      return {
+        html: `
         <td>${p.symbol || ""}</td>
-        <td class="text-end">${Number(p.amount || 0).toLocaleString()}</td>
-        <td class="text-end">${
-          p.avgCostPerUnitUsd
-            ? "$" + Number(p.avgCostPerUnitUsd).toFixed(4)
-            : ""
-        }</td>
-        <td class="text-end">${
-          p.marketPriceUsd ? "$" + Number(p.marketPriceUsd).toFixed(4) : ""
-        }</td>
-        <td class="text-end">${
-          p.marketValueUsd ? "$" + Number(p.marketValueUsd).toFixed(2) : "$0.00"
-        }</td>
-        <td class="text-end">${
-          p.unrealizedUsd ? "$" + Number(p.unrealizedUsd).toFixed(2) : "$0.00"
-        }</td>
-      `;
-      posBody.appendChild(tr);
+        <td class="text-end">${amount.toLocaleString()}</td>
+        <td class="text-end">${formatUsd(avgCost, 4, true)}</td>
+        <td class="text-end">${formatUsd(price, 4, true)}</td>
+        <td class="text-end">${formatUsd(value)}</td>
+        <td class="text-end">${formatUsd(unreal)}</td>
+      `,
+        value: Number.isFinite(value) ? value : 0,
+        unreal: Number.isFinite(unreal) ? unreal : 0,
+        amount,
+      };
+    };
+
+    const hideSmallAmount = document.getElementById("hideSmallAmount")?.checked;
+    const amountThreshold = 1;
+    let tokenValueTotal = 0;
+    let tokenUnrealTotal = 0;
+    let cashValueTotal = 0;
+    let cashUnrealTotal = 0;
+
+    Object.values(positions).forEach((p) => {
+      const symUpper = String(p.symbol || "").toUpperCase();
+      if (symUpper.includes("USDC.E")) {
+        return;
+      }
+      const amount = Number(p.amount || 0);
+      if (amount <= 0) return;
+      const row = makeRow(p);
+      const shouldHideAmount = hideSmallAmount && amount < amountThreshold;
+      if (isUsdcSymbol(p.symbol)) {
+        cashValueTotal += row.value;
+        cashUnrealTotal += row.unreal;
+        if (!shouldHideAmount) {
+          cashRows.push(row);
+        }
+      } else {
+        tokenValueTotal += row.value;
+        tokenUnrealTotal += row.unreal;
+        if (!shouldHideAmount) {
+          tokenRows.push(row);
+        }
+      }
     });
+
+    const appendRows = (body, rows) => {
+      if (!body) return;
+      rows.forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = row.html;
+        body.appendChild(tr);
+      });
+    };
+
+    appendRows(posBody, tokenRows);
+    appendRows(cashBody, cashRows);
+
+    if (totalVal) totalVal.textContent = "$" + tokenValueTotal.toFixed(2);
+    if (totalUnrl) totalUnrl.textContent = "$" + tokenUnrealTotal.toFixed(2);
+    if (cashTotalVal) cashTotalVal.textContent = "$" + cashValueTotal.toFixed(2);
+    if (cashTotalUnrl) cashTotalUnrl.textContent = "$" + cashUnrealTotal.toFixed(2);
 
     const realized = data.realized || [];
     realized.forEach((r) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${(r.time || "").replace("T", " ").replace("Z", "")}</td>
+        <td>${(r.time || "").replace("T", " " ).replace("Z", "")}</td>
         <td>${r.token || ""}</td>
         <td class="text-end">${Number(r.amount || 0).toLocaleString()}</td>
         <td class="text-end">${
@@ -1033,19 +1183,15 @@ async function loadPnl() {
       rlzBody.appendChild(tr);
     });
 
-    if (totalVal)
-      totalVal.textContent =
-        "$" + Number((data.stats || {}).marketValueUsd || 0).toFixed(2);
-    if (totalUnrl)
-      totalUnrl.textContent =
-        "$" + Number((data.stats || {}).unrealizedUsd || 0).toFixed(2);
+    const stats = data.stats || {};
     if (totalRlz)
       totalRlz.textContent =
-        "$" + Number((data.stats || {}).realizedUsd || 0).toFixed(2);
+        "$" + Number(stats.realizedUsd || 0).toFixed(2);
   } catch (_) {
     // silent
   }
 }
+
 
 // =======================
 // PnL Live updater
@@ -1152,6 +1298,10 @@ async function checkAIStatus() {
 // =======================
 // Event listeners
 // =======================
+document.getElementById("hideSmallAmount")?.addEventListener("change", () => {
+  loadBalances();
+  loadPnl();
+});
 document.getElementById("btnRefresh")?.addEventListener("click", loadBalances);
 document.getElementById("side")?.addEventListener("change", updateManualTradeUI);
 document.getElementById("manFromToken")?.addEventListener("change", refreshSellAvailability);
@@ -1171,11 +1321,43 @@ document.getElementById("btnExecute")?.addEventListener("click", manualTrade);
 document.getElementById("btnBatchTrade")?.addEventListener("click", batchTrade);
 document.getElementById("btnBridge")?.addEventListener("click", bridgeTokens);
 document.getElementById("batchSide")?.addEventListener("change", (evt) => {
+  const target = evt.target || evt.currentTarget;
+  const sideVal = String(target?.value || "").toLowerCase();
   const input = document.getElementById("batchReason");
-  if (!input) return;
-  const preset = String(input.value || "").toLowerCase();
-  if (!preset || preset.startsWith("batch ")) {
-    input.value = `batch ${evt.target.value}`;
+  if (input) {
+    const preset = String(input.value || "").toLowerCase();
+    if (!preset || preset.startsWith("batch ")) {
+      input.value = `batch ${sideVal}`;
+    }
+  }
+  const tokenGroup = document.getElementById("batchTokenGroup");
+  const chunkTokenGroup = document.getElementById("batchChunkTokenGroup");
+  const totalTokenInput = document.getElementById("batchTotalToken");
+  const chunkTokenInput = document.getElementById("batchChunkToken");
+  const totalUsdGroup = document.getElementById("batchTotalUsdGroup");
+  const chunkUsdGroup = document.getElementById("batchChunkUsdGroup");
+  const totalUsdInput = document.getElementById("batchTotalUsd");
+  const chunkUsdInput = document.getElementById("batchChunkUsd");
+  const showToken = sideVal === "sell";
+  const showUsd = sideVal !== "sell";
+  [tokenGroup, chunkTokenGroup].forEach((el) => {
+    if (!el) return;
+    el.classList.toggle("d-none", !showToken);
+  });
+  [totalUsdGroup, chunkUsdGroup].forEach((el) => {
+    if (!el) return;
+    el.classList.toggle("d-none", !showUsd);
+  });
+  if (!showToken) {
+    if (totalTokenInput) totalTokenInput.value = "";
+    if (chunkTokenInput) chunkTokenInput.value = "";
+  }
+  if (!showUsd) {
+    if (totalUsdInput) totalUsdInput.value = "";
+    if (chunkUsdInput) chunkUsdInput.value = "";
+  } else {
+    if (totalUsdInput && !totalUsdInput.value) totalUsdInput.value = "100";
+    if (chunkUsdInput && !chunkUsdInput.value) chunkUsdInput.value = "1";
   }
 });
 const batchSideEl = document.getElementById("batchSide");

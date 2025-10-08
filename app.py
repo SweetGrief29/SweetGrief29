@@ -219,6 +219,12 @@ DEFAULT_TOKENS = [
     {"symbol": "DAI",  "address": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063", "chain": "evm", "specificChain": "polygon"},
     # EVM: Base (partial known set)
     {"symbol": "WETH", "address": "0x4200000000000000000000000000000000000006", "chain": "evm", "specificChain": "base"},
+    {"symbol": "USDBC", "address": "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA", "chain": "evm", "specificChain": "base"},
+    # EVM: Arbitrum
+    {"symbol": "USDC", "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831", "chain": "evm", "specificChain": "arbitrum"},
+    # EVM: Optimism
+    {"symbol": "USDC", "address": "0x7f5c764cbc14f9669b88837ca1490cca17c31607", "chain": "evm", "specificChain": "optimism"},
+
     # Solana (SPL mints)
     {"symbol": "wSOL", "address": "So11111111111111111111111111111111111111112", "chain": "solana", "specificChain": "sol"},
     {"symbol": "USDC", "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "chain": "solana", "specificChain": "sol"},
@@ -317,6 +323,9 @@ def api_trades_clear():
 # ---------- PnL Ledger (server-side) ----------
 LEDGER_FILE = Path(__file__).resolve().parent / "pnl_ledger.json"
 
+HOLD_MIN_AMOUNT = 1e-9
+HOLD_MIN_INVEST = 1e-6
+
 def _load_ledger():
     base = {"positions": {}, "realized": [], "stats": {"realizedUsd": 0.0}}
     try:
@@ -324,7 +333,23 @@ def _load_ledger():
             with open(LEDGER_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 if isinstance(data, dict):
-                    return {**base, **data}
+                    merged = {**base, **data}
+                    positions = merged.get("positions", {}) or {}
+                    for key in list(positions.keys()):
+                        pos = positions.get(key) or {}
+                        try:
+                            amt = float(pos.get("amount", 0.0))
+                            inv = float(pos.get("investedUsd", 0.0))
+                        except Exception:
+                            amt = 0.0
+                            inv = 0.0
+                        if amt <= HOLD_MIN_AMOUNT and inv <= HOLD_MIN_INVEST:
+                            positions.pop(key, None)
+                            continue
+                        pos["amount"] = float(max(0.0, amt))
+                        pos["investedUsd"] = float(max(0.0, inv))
+                    merged["positions"] = positions
+                    return merged
     except Exception:
         pass
     return base
@@ -351,8 +376,12 @@ def _ledger_buy(addr: str, chain: str, specific: str, amount_to: float, cost_usd
     ledger = _load_ledger()
     key = _pos_key(addr, chain, specific)
     pos = ledger["positions"].get(key) or {"symbol": symbol or _symbol_of(addr) or addr, "amount": 0.0, "investedUsd": 0.0}
+    sym_label = symbol or pos.get("symbol") or _symbol_of(addr) or addr
     pos["amount"] = float(pos.get("amount", 0.0)) + float(amount_to)
     pos["investedUsd"] = float(pos.get("investedUsd", 0.0)) + float(cost_usd)
+    pos["symbol"] = sym_label
+    pos["amount"] = float(max(0.0, pos["amount"]))
+    pos["investedUsd"] = float(max(0.0, pos["investedUsd"]))
     ledger["positions"][key] = pos
     _save_ledger(ledger)
 
@@ -365,17 +394,25 @@ def _ledger_sell(addr: str, chain: str, specific: str, amount_from: float, proce
     cur_amt = float(pos.get("amount", 0.0))
     cur_inv = float(pos.get("investedUsd", 0.0))
     sell_amt = min(cur_amt, float(amount_from))
-    avg_cost_per_unit = (cur_inv / cur_amt) if cur_amt > 0 else 0.0
+    if cur_amt > HOLD_MIN_AMOUNT:
+        avg_cost_per_unit = cur_inv / cur_amt
+    else:
+        avg_cost_per_unit = 0.0
     cost_usd = sell_amt * avg_cost_per_unit
     pnl = float(proceeds_usd) - cost_usd
-    # update position
-    pos["amount"] = cur_amt - sell_amt
-    pos["investedUsd"] = max(0.0, cur_inv - cost_usd)
-    ledger["positions"][key] = pos
-    # realized log
+    remaining_amt = max(0.0, cur_amt - sell_amt)
+    remaining_inv = max(0.0, cur_inv - cost_usd)
+    sym_label = symbol or pos.get("symbol") or _symbol_of(addr) or addr
+    if remaining_amt <= HOLD_MIN_AMOUNT and remaining_inv <= HOLD_MIN_INVEST:
+        ledger["positions"].pop(key, None)
+    else:
+        pos["amount"] = float(remaining_amt)
+        pos["investedUsd"] = float(remaining_inv)
+        pos["symbol"] = sym_label
+        ledger["positions"][key] = pos
     event = {
         "time": datetime.now(timezone.utc).isoformat(),
-        "token": symbol or pos.get("symbol") or addr,
+        "token": sym_label,
         "address": addr,
         "chain": chain,
         "specificChain": specific,
@@ -385,8 +422,9 @@ def _ledger_sell(addr: str, chain: str, specific: str, amount_from: float, proce
         "costUsd": cost_usd,
         "pnlUsd": pnl,
     }
-    ledger["realized"].append(event)
-    ledger["stats"]["realizedUsd"] = float(ledger["stats"].get("realizedUsd", 0.0)) + pnl
+    ledger.setdefault("realized", []).append(event)
+    stats = ledger.setdefault("stats", {})
+    stats["realizedUsd"] = float(stats.get("realizedUsd", 0.0)) + pnl
     _save_ledger(ledger)
 
 @app.get("/api/pnl")
@@ -404,13 +442,14 @@ def api_pnl():
             except Exception:
                 specific, addr = "eth", key
             amt = float(pos.get("amount", 0.0))
+            if amt <= HOLD_MIN_AMOUNT:
+                continue
             inv = float(pos.get("investedUsd", 0.0))
             price = 0.0
-            if amt > 0:
-                try:
-                    price = _get_price(addr, chain="evm", specific_chain=specific)
-                except Exception:
-                    price = 0.0
+            try:
+                price = _get_price(addr, chain="evm", specific_chain=specific)
+            except Exception:
+                price = 0.0
             mkt = amt * (price or 0.0)
             unrl = mkt - inv
             total_mkt += mkt
@@ -418,7 +457,9 @@ def api_pnl():
             total_unrl += unrl
             enriched[key] = {
                 **pos,
-                "avgCostPerUnitUsd": (inv / amt) if amt > 0 else 0.0,
+                "amount": amt,
+                "investedUsd": inv,
+                "avgCostPerUnitUsd": (inv / amt) if amt > HOLD_MIN_AMOUNT else 0.0,
                 "marketPriceUsd": price,
                 "marketValueUsd": mkt,
                 "unrealizedUsd": unrl,
@@ -724,29 +765,72 @@ def api_batch_trade(body: dict = Body(...)):
             to_specific_chain = _default_specific_for_chain(to_chain)
         from_token = body.get("fromToken")
         to_token = body.get("toToken")
-        total_usd = float(body.get("totalUsd") or 0)
-        chunk_usd = float(body.get("chunkUsd") or 0)
+
+        def _coerce_float(val):
+            if val is None:
+                return None
+            try:
+                return float(val)
+            except (TypeError, ValueError):
+                return None
+
+        total_usd = _coerce_float(body.get("totalUsd"))
+        chunk_usd = _coerce_float(body.get("chunkUsd"))
+        total_token = _coerce_float(body.get("totalToken") or body.get("totalTokens"))
+        chunk_token = _coerce_float(body.get("chunkToken") or body.get("chunkTokens"))
         reason_base = str(body.get("reason", f"batch {side}") or f"batch {side}").strip() or f"batch {side}"
+
         if not from_token or not to_token:
             return JSONResponse({"error": "fromToken dan toToken wajib"}, status_code=400)
-        if total_usd <= 0:
-            return JSONResponse({"error": "totalUsd harus > 0"}, status_code=400)
-        if chunk_usd <= 0:
-            return JSONResponse({"error": "chunkUsd harus > 0"}, status_code=400)
-        spent = 0.0
+
+        if total_token is not None and total_token > 0 and side != "sell":
+            return JSONResponse({"error": "totalToken hanya didukung untuk side sell"}, status_code=400)
+
+        use_token_mode = side == "sell" and total_token is not None and total_token > 0
+        if use_token_mode:
+            if chunk_token is None:
+                chunk_token = total_token
+            if chunk_token <= 0:
+                return JSONResponse({"error": "chunkToken harus > 0"}, status_code=400)
+        else:
+            if total_usd is None or total_usd <= 0:
+                return JSONResponse({"error": "totalUsd harus > 0"}, status_code=400)
+            if chunk_usd is None or chunk_usd <= 0:
+                return JSONResponse({"error": "chunkUsd harus > 0"}, status_code=400)
+
+        spent_usd = 0.0
+        sold_token = 0.0
         iteration = 0
         chunks = []
 
-        while spent + 1e-9 < total_usd:
-            remaining = total_usd - spent
-            usd_chunk = min(chunk_usd, remaining)
-            try:
-                price_from = _get_price(from_token, chain, specific_chain)
-            except Exception as exc:
-                return JSONResponse({"error": f"gagal ambil harga: {exc}"}, status_code=500)
-            if not price_from:
-                return JSONResponse({"error": "Harga fromToken tidak tersedia"}, status_code=500)
-            amount_human = float(usd_chunk) / float(price_from)
+        while True:
+            if use_token_mode:
+                remaining_token = total_token - sold_token
+                if remaining_token <= 1e-9:
+                    break
+                token_chunk = min(chunk_token, remaining_token)
+                amount_human = float(token_chunk)
+                usd_chunk = None
+                price_from = None
+                try:
+                    price_from = _get_price(from_token, chain, specific_chain)
+                except Exception:
+                    price_from = None
+                if price_from:
+                    usd_chunk = float(amount_human) * float(price_from)
+            else:
+                remaining_usd = total_usd - spent_usd
+                if remaining_usd <= 1e-9:
+                    break
+                usd_chunk = min(chunk_usd, remaining_usd)
+                try:
+                    price_from = _get_price(from_token, chain, specific_chain)
+                except Exception as exc:
+                    return JSONResponse({"error": f"gagal ambil harga: {exc}"}, status_code=500)
+                if not price_from:
+                    return JSONResponse({"error": "Harga fromToken tidak tersedia"}, status_code=500)
+                amount_human = float(usd_chunk) / float(price_from)
+
             iteration += 1
             reason = f"{reason_base} #{iteration}"
             payload = {
@@ -783,36 +867,49 @@ def api_batch_trade(body: dict = Body(...)):
                     })
                 except Exception:
                     pass
-                return JSONResponse({
+                error_payload = {
                     "error": str(exc),
                     "iteration": iteration,
-                    "spent": spent,
+                    "spentUsd": spent_usd,
+                    "soldToken": sold_token,
                     "chunks": chunks,
                     "side": side,
-                    "upstream_status": status if status is not None else upstream_status,
+                    "upstream_status": status if isinstance(status, int) else upstream_status,
                     "upstream_body": body_txt if body_txt is not None else upstream_text,
-                }, status_code=status if isinstance(status, int) else 500)
+                }
+                error_payload["spent"] = spent_usd
+                return JSONResponse(error_payload, status_code=status if isinstance(status, int) else 500)
 
             chunk_entry = {
                 "iteration": iteration,
-                "usd": usd_chunk,
-                "amountHuman": amount_human,
+                "amountHuman": float(amount_human),
                 "response": resp,
                 "side": side,
             }
+            if usd_chunk is not None:
+                chunk_entry["usd"] = float(usd_chunk)
+            if use_token_mode:
+                chunk_entry["token"] = float(amount_human)
             chunks.append(chunk_entry)
-            spent += usd_chunk
+
+            if usd_chunk is not None:
+                spent_usd += float(usd_chunk)
+            sold_token += float(amount_human)
+
             try:
                 log = {
                     "type": "batch",
                     "side": side,
                     "status": "ok",
                     "iteration": iteration,
-                    "usd": usd_chunk,
-                    "amountHuman": amount_human,
+                    "amountHuman": float(amount_human),
                     "payload": payload,
                     "response": resp,
                 }
+                if usd_chunk is not None:
+                    log["usd"] = float(usd_chunk)
+                if use_token_mode:
+                    log["token"] = float(amount_human)
                 _append_trade(log)
                 if side == "buy":
                     _ensure_token_known(to_token, None, to_chain, to_specific_chain or "")
@@ -823,22 +920,26 @@ def api_batch_trade(body: dict = Body(...)):
                         price_to = _get_price(to_token, to_chain, to_specific_chain)
                     except Exception:
                         price_to = None
-                    cost_usd = float(usd_chunk)
-                    if price_to:
+                    cost_usd = float(usd_chunk) if usd_chunk is not None else None
+                    if price_to and cost_usd is not None:
                         amount_to = cost_usd / float(price_to)
                         _ledger_buy(to_token, to_chain, to_specific_chain or "", amount_to=amount_to, cost_usd=cost_usd, symbol=None)
                 else:
-                    _ledger_sell(from_token, chain, specific_chain or "", amount_from=float(amount_human), proceeds_usd=float(usd_chunk), symbol=None)
+                    if usd_chunk is not None:
+                        _ledger_sell(from_token, chain, specific_chain or "", amount_from=float(amount_human), proceeds_usd=float(usd_chunk), symbol=None)
             except Exception:
                 pass
 
-        return JSONResponse({
+        result = {
             "status": "ok",
             "side": side,
-            "totalUsd": spent,
+            "totalUsd": spent_usd,
             "chunks": chunks,
             "iterations": iteration,
-        })
+        }
+        if use_token_mode:
+            result["totalToken"] = sold_token
+        return JSONResponse(result)
     except Exception as e:
         try:
             _append_trade({
@@ -851,7 +952,6 @@ def api_batch_trade(body: dict = Body(...)):
         except Exception:
             pass
         return JSONResponse({"error": str(e)}, status_code=500)
-
 
 
 @app.post("/api/manual-trade")

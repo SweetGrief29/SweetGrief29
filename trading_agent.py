@@ -263,34 +263,72 @@ def run_batch_buy(
 def run_batch_sell(
     BASE: str,
     hdrs: Dict[str, str],
-    total_usd: float,
-    chunk_usd: float = 1.0,
+    total_usd: Optional[float] = None,
+    chunk_usd: Optional[float] = None,
     from_token: str = 'WETH',
     to_token: str = 'USDC',
     chain: str = 'evm',
     specific: str = 'eth',
     reason: Optional[str] = None,
+    total_token: Optional[float] = None,
+    chunk_token: Optional[float] = None,
 ) -> None:
-    """Execute repeated sell trades until total_usd worth is sold."""
-    if total_usd <= 0:
-        raise SystemExit('total_usd harus > 0')
-    if chunk_usd <= 0:
-        raise SystemExit('chunk_usd harus > 0')
+    """Execute repeated sell trades until total_usd or total_token target is reached."""
+    use_token_mode = total_token is not None and total_token > 0
+    if use_token_mode:
+        total_token = float(total_token)
+        chunk_token = float(chunk_token) if chunk_token is not None else total_token
+        if chunk_token <= 0:
+            raise SystemExit('chunk_token harus > 0')
+    else:
+        if total_usd is None or total_usd <= 0:
+            raise SystemExit('total_usd harus > 0')
+        if chunk_usd is None or chunk_usd <= 0:
+            raise SystemExit('chunk_usd harus > 0')
+        total_usd = float(total_usd)
+        chunk_usd = float(chunk_usd)
 
     from_token_addr = resolve_token(from_token, specific)
     to_token_addr = resolve_token(to_token, specific)
-    sold = 0.0
-    iteration = 0
     base_reason = (reason or 'batch sell').strip() or 'batch sell'
 
-    while sold + 1e-9 < total_usd:
-        remaining = total_usd - sold
-        usd_chunk = min(chunk_usd, remaining)
-        price_from = get_price(BASE, hdrs, from_token_addr, chain=chain, specific=specific)
-        amount_from = trade_value_to_amount_usd(usd_chunk, price_from)
+    iteration = 0
+    spent_usd = 0.0
+    sold_tokens = 0.0
+
+    while True:
+        if use_token_mode:
+            remaining_token = total_token - sold_tokens
+            if remaining_token <= 1e-9:
+                break
+            token_chunk = min(chunk_token, remaining_token)
+            amount_from = token_chunk
+            usd_chunk = None
+            try:
+                price_from = get_price(BASE, hdrs, from_token_addr, chain=chain, specific=specific)
+            except Exception:
+                price_from = None
+            if price_from:
+                usd_chunk = float(amount_from) * float(price_from)
+                print(f"Chunk {iteration + 1}: sell {amount_from:.6f} units ≈ ${usd_chunk:.2f}")
+            else:
+                print(f"Chunk {iteration + 1}: sell {amount_from:.6f} units (harga tidak tersedia)")
+        else:
+            remaining_usd = total_usd - spent_usd
+            if remaining_usd <= 1e-9:
+                break
+            usd_chunk = min(chunk_usd, remaining_usd)
+            price_from = get_price(BASE, hdrs, from_token_addr, chain=chain, specific=specific)
+            amount_from = trade_value_to_amount_usd(usd_chunk, price_from)
+            print(f"Chunk {iteration + 1}: sell ${usd_chunk:.2f} -> {amount_from:.6f} units")
+
         iteration += 1
-        print(f"Chunk {iteration}: sell ${usd_chunk:.2f} -> {amount_from:.6f} units")
-        print(f"Progress: ${sold + usd_chunk:.2f} / ${total_usd:.2f}")
+        progress_tokens = sold_tokens + amount_from
+        if use_token_mode:
+            print(f"Progress: {progress_tokens:.6f} / {total_token:.6f} tokens")
+        else:
+            print(f"Progress: ${spent_usd + usd_chunk:.2f} / ${total_usd:.2f}")
+
         execute_trade(
             BASE,
             hdrs,
@@ -301,9 +339,18 @@ def run_batch_sell(
             chain=chain,
             specific=specific,
         )
-        sold += usd_chunk
 
-    print(f"Selesai batch sell: total ${sold:.2f} dalam {iteration} langkah.")
+        sold_tokens = progress_tokens
+        if usd_chunk is not None:
+            spent_usd += float(usd_chunk)
+
+    if use_token_mode:
+        if spent_usd > 0:
+            print(f"Selesai batch sell: total {sold_tokens:.6f} token ≈ ${spent_usd:.2f} dalam {iteration} langkah.")
+        else:
+            print(f"Selesai batch sell: total {sold_tokens:.6f} token dalam {iteration} langkah.")
+    else:
+        print(f"Selesai batch sell: total ${spent_usd:.2f} dalam {iteration} langkah.")
 
 
 
@@ -336,6 +383,8 @@ if __name__ == "__main__":
     parser.add_argument("--reason", type=str, default="manual trade", help="Alasan trade")
     parser.add_argument("--total-usd", type=float, help="Total USD untuk batch trade")
     parser.add_argument("--chunk-usd", type=float, default=1.0, help="Nominal USD per chunk batch trade (default 1)")
+    parser.add_argument("--total-token", type=float, help="Total token (human units) untuk batch trade")
+    parser.add_argument("--chunk-token", type=float, help="Jumlah token per chunk batch trade")
 
     args = parser.parse_args()
 
@@ -414,11 +463,15 @@ if __name__ == "__main__":
         )
     else:
         total_usd = args.total_usd if args.total_usd is not None else args.amount_usd
-        if total_usd is None or total_usd <= 0:
-            raise SystemExit("Mode batch-sell perlu --total-usd (>0)")
+        total_token = args.total_token
+        if (total_token is None or total_token <= 0) and (total_usd is None or total_usd <= 0):
+            raise SystemExit("Mode batch-sell perlu --total-usd (>0) atau --total-token (>0)")
         from_token = args.from_token or "WETH"
         to_token = args.to_token or "USDC"
-        chunk_usd = args.chunk_usd or 1.0
+        chunk_usd = args.chunk_usd
+        if total_usd is not None and total_usd > 0 and (chunk_usd is None or chunk_usd <= 0):
+            chunk_usd = 1.0
+        chunk_token = args.chunk_token
         reason = args.reason
         if reason == "manual trade":
             reason = "batch sell"
@@ -432,4 +485,6 @@ if __name__ == "__main__":
             chain=args.chain,
             specific=args.specific_chain,
             reason=reason,
+            total_token=total_token,
+            chunk_token=chunk_token,
         )
